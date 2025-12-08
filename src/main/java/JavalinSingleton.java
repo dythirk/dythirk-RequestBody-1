@@ -2,6 +2,7 @@
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.javalin.Javalin;
+import com.example.model.User;
 
 
 /**
@@ -23,6 +24,16 @@ public class JavalinSingleton {
         app.post("/echo", ctx -> {
             
             //implement logic here
+            //retrieve the json string from the request body
+            String jsonString = ctx.body();
+
+            //utilize jackson to convert the json string to a user object
+            User user = om.readValue(jsonString, User.class);
+    
+            //now we can use the 'user' response body as a Java object in whatever way we see fit.
+        
+            //eg: return the user as the response body, but also have Javalin convert it to JSON  
+            ctx.json(user); 
                 
         });
 
@@ -36,6 +47,17 @@ public class JavalinSingleton {
         app.post("/changeartisttobeatles", ctx -> {
 
             //implement logic here
+        //retrieve the json string from the request body
+        String jsonString=ctx.body();
+
+        //utilize jackson to convert the json string to a user object
+        User user=om.readValue(jsonString,User.class);
+
+        //change the last name
+        user.setArtistName("Beatles");
+
+        //generate an HTTP response with the user object in the response body as a JSON.
+        ctx.json(user);
                
         });
 
