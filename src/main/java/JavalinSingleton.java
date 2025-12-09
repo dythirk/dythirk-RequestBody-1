@@ -28,6 +28,7 @@ public class JavalinSingleton {
             String jsonString = ctx.body();
 
             //utilize jackson to convert the json string to a user object
+            //ObjectMapper om = new ObjectMapper();
             User user = om.readValue(jsonString, User.class);
     
             //now we can use the 'user' response body as a Java object in whatever way we see fit.
